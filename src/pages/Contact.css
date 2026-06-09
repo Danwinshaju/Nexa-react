@@ -1,0 +1,56 @@
+.hero-section {
+  padding-top: 80px;
+  background: #000;
+  color: #fff;
+}
+
+.form-control {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.form-control::placeholder {
+  color: #777;
+}
+
+.form-control:focus {
+  background: #111;
+  color: #fff;
+  border-color: cyan;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.contact-box {
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-box h3 {
+  color: cyan;
+}
+
+.info-card {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.25rem;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+}
+
+.map-box {
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.08);
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+}

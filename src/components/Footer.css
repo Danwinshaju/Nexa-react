@@ -1,0 +1,21 @@
+ footer{
+        background: #050816;
+        padding: 40px 0;
+        border-top: 1px solid cyan;
+    }
+
+    footer p{
+        color: #bbb;
+    }
+
+    .social-icons i{
+        color: white;
+        margin: 0 10px;
+        font-size: 25px;
+        transition: 0.3s;
+    }
+
+    .social-icons i:hover{
+        color: cyan;
+        transform: scale(1.2);
+    }
