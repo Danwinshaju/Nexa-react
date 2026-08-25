@@ -1,4 +1,28 @@
-# Getting Started with Create React App
+# Nexa Gaming
+
+A full-stack gaming storefront with live catalogue search, category and price filters, product details, wishlist, persistent cart, checkout, order receipt downloads, contact and newsletter flows, and a MongoDB-ready Express API.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+The storefront runs at `http://localhost:5173/Nexa-react/` and the API at `http://localhost:5000`. For production: `npm run build` then `npm start`.
+
+## API
+
+- `GET /api/health`
+- `GET /api/products?q=&category=&max=&sort=`
+- `GET /api/products/:id`
+- `POST /api/orders`
+- `POST /api/contact`
+- `POST /api/newsletter`
+
+Add `MONGODB_URI` from `.env.example` for persistent orders. Without it, the server uses temporary order storage. GitHub Pages keeps all shopping flows operational in demo mode while the included Render blueprint hosts the complete backend.
+
+<!-- Legacy CRA notes retained below for historical reference. -->
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
