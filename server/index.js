@@ -69,8 +69,16 @@ app.post('/api/newsletter', (request, response) => /^\S+@\S+\.\S+$/.test(request
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.resolve(root, '../dist');
-app.use(express.static(dist));
-app.use('/Nexa-react', express.static(dist));
+const staticOptions = {
+  etag: true,
+  maxAge: '1y',
+  immutable: true,
+  setHeaders(response, filePath) {
+    if (filePath.endsWith('.html')) response.setHeader('Cache-Control', 'no-cache');
+  }
+};
+app.use(express.static(dist, staticOptions));
+app.use('/Nexa-react', express.static(dist, staticOptions));
 app.get('*', (request, response, next) => request.path.startsWith('/api/') ? next() : response.sendFile(path.join(dist, 'index.html')));
 app.use((error, _request, response, _next) => { console.error(error); response.status(500).json({ message: 'Something went wrong. Please try again.' }); });
 app.listen(process.env.PORT || 5000, () => console.log(`Nexa Gaming running on port ${process.env.PORT || 5000}`));

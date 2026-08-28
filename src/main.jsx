@@ -71,7 +71,7 @@ function Header() {
         <button className="icon-button" aria-label="Search" title="Search" type="submit"><SearchIcon /></button>
         {suggestionsOpen && query.trim().length > 1 && <div className="search-suggestions">
           {suggestions.length ? suggestions.map(product => <button type="button" className="suggestion" key={product.id} onMouseDown={() => navigate(`/product/${product.id}`)}>
-            <img src={product.image} alt="" /><span><strong>{product.name}</strong><small>{product.category}. {product.id}. {money(product.price)}</small></span>
+            <img src={product.image} alt="" loading="lazy" decoding="async" /><span><strong>{product.name}</strong><small>{product.category}. {product.id}. {money(product.price)}</small></span>
           </button>) : <div className="suggestion-empty">No related products found</div>}
           {suggestions.length > 0 && <button type="submit" className="all-results">View all related results</button>}
         </div>}
@@ -98,7 +98,7 @@ function Footer() {
 function ProductCard({ product }) {
   const { add, wishlist, toggleWish } = useStore();
   return <article className="product-card">
-    <Link to={`/product/${product.id}`} className="product-image"><img src={product.image} alt={product.name} /><span>{product.tag}</span></Link>
+    <Link to={`/product/${product.id}`} className="product-image"><img src={product.image} alt={product.name} loading="lazy" decoding="async" /><span>{product.tag}</span></Link>
     <button className={`heart ${wishlist.includes(product.id) ? 'loved' : ''}`} onClick={() => toggleWish(product.id)} aria-label={wishlist.includes(product.id) ? 'Remove from wishlist' : 'Save to wishlist'}>{wishlist.includes(product.id) ? 'Saved' : 'Save'}</button>
     <p>{product.category}</p><small className="product-id">Product ID {product.id}</small>
     <Link to={`/product/${product.id}`}><h3>{product.name}</h3></Link>
@@ -108,10 +108,10 @@ function ProductCard({ product }) {
 
 function Home() {
   return <main>
-    <section className="hero"><div><p className="eyebrow">Built for every win</p><h1>Gear up.<br /><em>Game on.</em></h1><p>Precision peripherals, immersive audio and battle-tested comfort. Build a setup that keeps up with you.</p><Link className="primary" to="/shop">Shop gaming gear</Link></div><div className="hero-media"><video autoPlay muted loop playsInline><source src={asset('videos/index/1.mp4')} /></video><span>Nexa performance series</span></div></section>
+    <section className="hero"><div><p className="eyebrow">Built for every win</p><h1>Gear up.<br /><em>Game on.</em></h1><p>Precision peripherals, immersive audio and battle-tested comfort. Build a setup that keeps up with you.</p><Link className="primary" to="/shop">Shop gaming gear</Link></div><div className="hero-media"><video autoPlay muted loop playsInline preload="metadata"><source src={asset('videos/index/1.mp4')} type="video/mp4" /></video><span>Nexa performance series</span></div></section>
     <div className="marquee">ZERO LAG. MAXIMUM CONTROL. IMMERSIVE AUDIO. ALL-DAY COMFORT.</div>
     <section className="section"><div className="section-head"><div><p className="eyebrow">Player favourites</p><h2>Upgrade your <em>loadout</em></h2></div><Link to="/shop">Shop all</Link></div><div className="grid">{products.slice(0, 16).map(product => <ProductCard key={product.id} product={product} />)}</div></section>
-    <section className="story"><img src={products[31].image} alt="Nexa gaming setup" /><div><p className="eyebrow">Nexa advantage</p><h2>Performance you<br />can <em>feel.</em></h2><p>Every product is selected for responsiveness, reliability and comfort—so the gear disappears and the game takes over.</p><Link className="primary inverse" to="/about">Why Nexa</Link></div></section>
+    <section className="story"><img src={products[31].image} alt="Nexa gaming setup" loading="lazy" decoding="async" /><div><p className="eyebrow">Nexa advantage</p><h2>Performance you<br />can <em>feel.</em></h2><p>Every product is selected for responsiveness, reliability and comfort—so the gear disappears and the game takes over.</p><Link className="primary inverse" to="/about">Why Nexa</Link></div></section>
     <section className="section arrivals"><div className="section-head"><div><p className="eyebrow">Fresh drops</p><h2>New to the <em>arena</em></h2></div><Link to="/shop?sort=rating">View top-rated gear</Link></div><div className="grid">{products.slice(16, 32).map(product => <ProductCard key={product.id} product={product} />)}</div></section>
   </main>;
 }
@@ -143,7 +143,7 @@ function Product() {
   const product = products.find(item => item.id === id);
   const { add, toggleWish, wishlist } = useStore();
   if (!product) return <NotFound />;
-  return <main className="product-page"><div className="product-detail"><img src={product.image} alt={product.name} /><div><p className="eyebrow">{product.category}. {product.tag}</p><small className="product-id">Product ID {product.id}</small><h1>{product.name}</h1><div className="rating">Rating {product.rating} out of 5. <span>Editor reviewed</span></div><h2>{money(product.price)}</h2><p>{product.description}</p><ul><li>Responsibly selected materials</li><li>Complimentary delivery over INR 15,000</li><li>Easy returns within 14 days</li></ul><button className="primary wide detail-cart" onClick={() => add(product.id)}><CartIcon /><span>Add to cart</span></button><button className="secondary wide" onClick={() => toggleWish(product.id)}>{wishlist.includes(product.id) ? 'Remove from wishlist' : 'Save to wishlist'}</button></div></div></main>;
+  return <main className="product-page"><div className="product-detail"><img src={product.image} alt={product.name} loading="lazy" decoding="async" /><div><p className="eyebrow">{product.category}. {product.tag}</p><small className="product-id">Product ID {product.id}</small><h1>{product.name}</h1><div className="rating">Rating {product.rating} out of 5. <span>Editor reviewed</span></div><h2>{money(product.price)}</h2><p>{product.description}</p><ul><li>Responsibly selected materials</li><li>Complimentary delivery over INR 15,000</li><li>Easy returns within 14 days</li></ul><button className="primary wide detail-cart" onClick={() => add(product.id)}><CartIcon /><span>Add to cart</span></button><button className="secondary wide" onClick={() => toggleWish(product.id)}>{wishlist.includes(product.id) ? 'Remove from wishlist' : 'Save to wishlist'}</button></div></div></main>;
 }
 
 function DepartmentPage({ department, label, title, description }) {
